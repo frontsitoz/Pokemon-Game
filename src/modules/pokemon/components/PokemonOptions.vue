@@ -1,18 +1,53 @@
+//* Este componente renderiza las opciones de Pokémon que el usuario puede elegir, las opciones
+están actualmente estáticas , pero seguramente en un futuro se llenarán dinámicamente con datos
+obtenidos de la API.
+
 <template>
-  <section class="mt-5">
-    <ul>
-      <li>Pokemon1</li>
-      <li>Pokemon2</li>
-      <li>Pokemon3</li>
-      <li>Pokemon4</li>
-    </ul>
+  <section class="mt-5 flex flex-col">
+    <button
+      v-for="{ name, id } in options"
+      :key="id"
+      @click="$emit('selectedOption', id)"
+      :class="[
+        'capitalize disabled:shadow-none disabled:bg-gray-100',
+        {
+          correct: id === correctAnswer && blockSelection,
+          incorrect: id !== correctAnswer && blockSelection,
+        },
+      ]"
+      :disabled="blockSelection"
+    >
+      {{ name }}
+    </button>
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { Pokemon } from '../../pokemon/interfaces';
+
+interface Props {
+  options: Pokemon[];
+  blockSelection: boolean;
+  correctAnswer: number;
+}
+
+defineProps<Props>();
+
+defineEmits<{
+  selectedOption: [id: number];
+}>();
+</script>
 
 <style scoped>
-li {
+button {
   @apply bg-white shadow-md rounded-lg p-3 m-3 cursor-pointer w-40 text-center transition-all hover:bg-gray-200;
+}
+
+.correct {
+  @apply bg-blue-500 text-white;
+}
+
+.incorrect {
+  @apply bg-red-100 opacity-70;
 }
 </style>
