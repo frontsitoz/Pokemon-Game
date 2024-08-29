@@ -1,6 +1,4 @@
-//* Este componente renderiza las opciones de Pokémon que el usuario puede elegir, las opciones
-están actualmente estáticas , pero seguramente en un futuro se llenarán dinámicamente con datos
-obtenidos de la API.
+//* Este componente renderiza las opciones de Pokémon que el usuario puede elegir
 
 <template>
   <section class="mt-5 flex flex-col">
