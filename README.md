@@ -1,4 +1,3 @@
-# pokemon-game
 
 # Pokémon Game 🎮🐾
 
